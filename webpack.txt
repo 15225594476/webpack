@@ -1,0 +1,77 @@
+1、Webpack 是什么---->模块打包机
+        文档http://www.css88.com/doc/webpack2/
+	a、它一个前端资源加载/打包工具。它将根据模块的依赖关系进行静态分析，然后将这些模块按照指定的规则生成对应的静态资源。
+	b、分析你的项目结构，找到JavaScript模块以及其它的一些浏览器不能直接运行的拓展语言（Scss，TypeScript等），并将其转换和打包为合适的格式供浏览器使用。
+
+2、webpack与grunt以及Gulp相比有什么区别
+	
+	无太多可比性,Gulp/Grunt是一种能够优化前端的开发流程的工具	，WebPack是一种模块化的解决方案
+
+	工作方式不同:
+
+		Grunt和Gulp的工作方式是：在一个配置文件中，指明对某些文件进行类似编译，组合，压缩等任务的具体步骤，工具之后可以自动替你完成这些任务。
+
+		Webpack的工作方式是：把你的项目当做一个整体，通过一个给定的主文件（如：index.js），Webpack将从这个文件开始找到你的项目的所有依赖文件，使用loaders处理它们，最后打包为一个（或多个）浏览器可识别的JavaScript文件。
+		
+		Webpack优点:处理速度更快更直接，能打包更多不同类型的文件。
+3、安装Webpack
+	本地环境:   node js环境
+	安装命令:   npm install webpack -g
+		        npm install webpack--save-dev
+			
+	package.json:这是一个标准的npm说明文件，里面蕴含了丰富的信息，包括当前项目的依赖模块，
+	自定义的脚本任务等等。在终端中使用npm init命令可以自动创建这个package.json文件
+
+使用webpack构建本地服务器
+	让你的浏览器监听你的代码的修改，并自动刷新显示修改后的结果
+	基于node.js构建
+	它是一个单独的组件，在webpack中进行配置之前需要单独安装它作为项目依赖
+		命令:npm install --save-dev webpack-dev-server
+
+
+	devserver的配置选项
+		contentBase	默认webpack-dev-server会为根文件夹提供本地服务器，如果想为另外一个目录下的文件提供本地服务器，应该在这里设置其所在目录
+		port 	设置默认监听端口，如果省略，默认为"8080"
+		inline  设置为true，当源文件改变时会自动刷新页面
+		historyApiFallback	在开发单页应用时非常有用，它依赖于HTML5 history API，如果设置为true，所有的跳转将指向index.html
+	
+	注:要在package.json中的scripts对象中添加如下命令:"server": "webpack-dev-server --open"
+			
+	具体审查:https://www.jianshu.com/p/42e11515c10f
+
+Loaders
+    Loaders需要单独安装并且需要在webpack.config.js中的modules关键字下进行配置，Loaders的配置包括以下几方面：
+    安装命令npm install --save-dev json-loader
+  modules配置选项
+        功能描述
+        test    一个匹配loaders所处理的文件的拓展名的正则表达式（必须）
+        loader  loader的名称（必须）
+        include/exclude 手动添加(include)必须处理的文件（文件夹）或屏蔽(exclude)不需要处理的文件（文件夹）（可选）
+        query   为loaders提供额外的设置选项（可选）
+2、Babel
+    Babel其实是一个编译JavaScript的平台，它的强大之处表现在可以通过编译达到以下目的：
+    Babel其实是几个模块化的包，其核心功能位于称为babel-core的npm包中。
+    对于每一个需要的功能或拓展，都需要安装单独的包
+    （用得最多的是
+                 babel-preset-react: 用来解析React的JSX。
+                 babel-preset-es2015：用来解析ES6语法
+                 css-loader   :   使得能够使用类似@import 和 url(...)的方法实现 require()的功能
+                 style-loader : 将所有的计算后的样式加入页面中，二者组合在一起能够把样式表嵌入webpack打包后的JS文件中
+                 postcss-loader
+                 autoprefixer
+    命令 :npm install --save-dev babel-core
+                                 babel-preset-react: 用来解析React的JSX。
+                                 babel-preset-es2015：用来解析ES6语法
+                                 css-loader   :   使得能够使用类似@import 和 url(...)的方法实现 require()的功能
+                                 style-loader : 将所有的计算后的样式加入页面中，二者组合在一起能够把样式表嵌入webpack打包后的JS文件中
+
+3、CSS的处理平台-PostCSS
+    我们使用PostCSS来为CSS代码自动添加适应不同浏览器的CSS前缀。
+    npm install --save-dev postcss-loader
+                           autoprefixer：自动添加前缀的插件
+4、Scss
+    安装插件:npm install --save-dev sass-loader：     sass依赖包
+                                    node-sass  ：    因为sass-loader依赖于node-sass，所以还要安装node-sass
+5、图片压缩
+    安装插件npm install imagemin-webpack-plugin
+            参考: http://blog.csdn.net/zb_ctrl/article/details/75549350

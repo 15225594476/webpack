@@ -1,0 +1,20 @@
+1、主页面必须引入解析出的js文件，不是打包后的文件。否则就必须手动加载
+2、安装了babel-core就别安装babel  只需要安装一个
+		node API的babel已经移到babel-core。
+3、test配置js 要用双引号,别的千万别加引号，别问我为什么
+		参考:https://www.imooc.com/qadetail/221015有个评论
+4、找不到对应的loader，  loader改成: 'style-loader!css-loader'，版本迭代的问题。
+		参考:https://www.cnblogs.com/bug-master/p/6434082.html
+5、scss的写法
+
+
+
+
+
+
+
+
+
+
+
+
